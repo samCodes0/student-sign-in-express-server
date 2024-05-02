@@ -23,6 +23,7 @@ onMounted(() => {
 
 <template>
   <!-- laying out all the components on the page -->
+  <h1>Student Sign In</h1>
   <NewStudentForm></NewStudentForm>
   <StudentTable></StudentTable>
   <StudentMessage></StudentMessage>
@@ -30,4 +31,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
+h1 {
+  margin: 10px;
+}
 </style>

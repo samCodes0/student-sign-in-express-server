@@ -1,7 +1,15 @@
 // THE MAIN FILE THAT CONTROL THE WEB APP SERVER
 const express = require('express');  // importing express into the app
 const apiRoutes = require('./routes/api');
+// importing the path module to get the path to the static files
+const path = require('path');
+
 const app = express();  // gaining a local instance of an express app
+// using the path.join method the get the path to the static files
+const staticFilePath = path.join(__dirname, 'client', 'dist');
+const staticFiles = express.static(staticFilePath);
+// when we have requests to the home page, serve static files - the vue app index.html
+app.use('/', staticFiles);
 
 // built in middleware function provided by express to parse incoming requests with JSON payloads
 // the path argument for app.use() will default to '/' which is the root path if a path is not specified.
@@ -10,7 +18,7 @@ app.use(express.json());
 app.use('/api', apiRoutes);
 app.use(function(req, res, next) {
     // in the case that the router is not setup to handle to route, this will run
-    res.status(404).send('Sorry, not found');
+    res.status(404).send('Sorry, page not found');
 })
 
 // it is important to make sure the err parameter is the first parameter in the callback function

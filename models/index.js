@@ -8,9 +8,11 @@ const createStudentModel = require('./student.js');
 // At azure, we'll create an environment variable for your server called NODE_ENV and set it to "production"
 // if there is not NODE_ENV set, like on your computer, we'll use the value 'development'
 const env = process.env.NODE_ENV || "development";  // sets env to the node environment if running from node
+// reading the environment variable that we set in azure for the password for the database connection
+const dbPassword = process.env.DB_PASSWORD;
 
 const config = configJson[env];  // read the configuration object for 'development' or 'production'
-
+config.password = dbPassword;
 const sequelize = new Sequelize(config);  // creating a new Sequelize object using the config object we created
 
 const database = {  // this looks weird but it is how we define databases in sequelize
